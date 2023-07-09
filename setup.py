@@ -36,6 +36,7 @@ class CMakeBuild(build_ext):
 
         debug = int(os.environ.get("DEBUG", 0)) if self.debug is None else self.debug
         cfg = "Debug" if debug else "Release"
+        print(f'DEBUG = "{cfg}"')
 
         # CMake lets you override the generator - we need to check this.
         # Can be set with Conda-Build, for example.
@@ -138,3 +139,13 @@ setup(
     extras_require={"test": ["pytest>=6.0"]},
     python_requires=">=3.7",
 )
+
+
+# from distutils.core import setup
+# from pybind11.setup_helpers import Pybind11Extension
+
+
+# setup(name="cmake_example",
+#       version="1.0.0",
+#       ext_modules=[Pybind11Extension("cmake_example", ["src/main.cpp"], extra_compile_args=["-g"])],
+#       )
