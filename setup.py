@@ -7,6 +7,8 @@ from pathlib import Path
 from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
 
+
+
 # Convert distutils Windows platform specifiers to CMake -A arguments
 PLAT_TO_CMAKE = {
     "win32": "Win32",
@@ -133,9 +135,12 @@ setup(
     author_email="mtdziubinski@gmail.com",
     description="A test project using pybind11, CMake, and PyTorch",
     long_description="",
-    ext_modules=[CMakeExtension("pybind_experiments")],
+    ext_modules=[
+        CMakeExtension("simple_functions"),
+        CMakeExtension("astar"),
+        CMakeExtension("torch_functions"),
+    ],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,
-    extras_require={"test": ["pytest>=6.0"]},
-    python_requires=">=3.7",
+    python_requires=">=3.8",
 )

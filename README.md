@@ -15,3 +15,16 @@ and to (re)build it in release mode, I run:
 ```bash
 pip install --upgrade -e .
 ```
+
+## torch
+python -m pip install torch==2.0.1+cpu --index-url https://download.pytorch.org/whl/cpu
+
+## libtorch
+Get it from: https://pytorch.org/get-started/locally/
+```bash
+wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip 
+```
+and
+```bash
+unzip libtorch-shared-with-deps-latest.zip
+```

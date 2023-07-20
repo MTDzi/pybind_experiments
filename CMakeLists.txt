@@ -1,10 +1,35 @@
 cmake_minimum_required(VERSION 3.4...3.18)
 project(pybind_experiments)
 
+# set(CMAKE_CXX_STANDARD 17)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# set(CMAKE_PREFIX_PATH "/home/md/git-projects/pybind_experiments/libtorch")
+set(CMAKE_PREFIX_PATH "/home/md/pybind_env/lib/python3.8/site-packages/torch/share/cmake")
+
+find_package(Torch REQUIRED)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
+
 add_subdirectory(pybind11)
-pybind11_add_module(pybind_experiments src/simple_functions.cpp)
+pybind11_add_module(simple_functions src/simple_functions.cpp)
+pybind11_add_module(astar src/astar.cpp)
+
+pybind11_add_module(torch_functions src/torch_functions.cpp)
+target_link_libraries(torch_functions PRIVATE ${TORCH_LIBRARIES})
+target_include_directories(torch_functions PRIVATE ${TORCH_INCLUDE_DIRS})
+target_compile_features(torch_functions PUBLIC cxx_std_17)
+
+
+message(STATUS "TORCH_CXX_FLAGS: ${TORCH_CXX_FLAGS}")
+message(STATUS "TORCH_LIBRARIES: ${TORCH_LIBRARIES}")
+message(STATUS "TORCH_INCLUDE_DIRS: ${TORCH_INCLUDE_DIRS}")
+
 
 # EXAMPLE_VERSION_INFO is defined by setup.py and passed into the C++ code as a
 # define (VERSION_INFO) here.
-target_compile_definitions(pybind_experiments
+target_compile_definitions(simple_functions
+                           PRIVATE VERSION_INFO=${EXAMPLE_VERSION_INFO})
+target_compile_definitions(astar
+                           PRIVATE VERSION_INFO=${EXAMPLE_VERSION_INFO})
+target_compile_definitions(torch_functions
                            PRIVATE VERSION_INFO=${EXAMPLE_VERSION_INFO})
