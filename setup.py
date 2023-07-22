@@ -4,9 +4,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-from setuptools import Extension, setup
+from setuptools import Extension, setup, find_packages
 from setuptools.command.build_ext import build_ext
-
 
 
 # Convert distutils Windows platform specifiers to CMake -A arguments
@@ -51,6 +50,7 @@ class CMakeBuild(build_ext):
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={extdir}{os.sep}",
             f"-DPYTHON_EXECUTABLE={sys.executable}",
             f"-DCMAKE_BUILD_TYPE={cfg}",  # not used on MSVC, but no harm
+            f"-DCMAKE_PREFIX_PATH={os.getenv('TORCH_CMAKE_PREFIX_PATH')}"
         ]
         build_args = []
         # Adding CMake arguments set as environment variable
@@ -135,6 +135,7 @@ setup(
     author_email="mtdziubinski@gmail.com",
     description="A test project using pybind11, CMake, and PyTorch",
     long_description="",
+    packages=find_packages(),
     ext_modules=[
         CMakeExtension("simple_functions"),
         CMakeExtension("astar"),

@@ -27,6 +27,7 @@ struct CompareNodes {
     }
 };
 
+
 class Grid {
 public:
     int numRows, numCols;
@@ -46,6 +47,7 @@ public:
 private:
     std::vector<std::vector<int>> grid;
 };
+
 
 class AStar {
 public:

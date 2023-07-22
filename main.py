@@ -7,12 +7,14 @@ import src.simple_functions as py_func
 import src.astar as py_astar
 import simple_functions as cpp_func
 import astar as cpp_astar
-import torch_functions as cpp_torch_functions
-cpp_torch_functions.subtract_tensors_n_times(torch.Tensor([0, 1, 2], device='cpu'), torch.Tensor([3,4,5], device='cpu'), 100)
+try:
+    import torch_functions as cpp_torch_functions
+    cpp_torch_functions.subtract_tensors_n_times(torch.Tensor([0, 1, 2], device='cpu'), torch.Tensor([3,4,5], device='cpu'), 100)
+except:
+    from torch_utils import cpp
 
 
-
-def produce_path(GridClass, AStarClass, grid_size=20):
+def run_astar(GridClass, AStarClass, grid_size=20):
     # Create a grid
     g = GridClass(grid_size, grid_size)
     
@@ -44,8 +46,8 @@ def main():
         },
         {
             'functions': {
-                'py': lambda: produce_path(cpp_astar.Grid, cpp_astar.AStar),
-                'cpp': lambda: produce_path(py_astar.Grid, py_astar.AStar),
+                'py': lambda: run_astar(cpp_astar.Grid, cpp_astar.AStar),
+                'cpp': lambda: run_astar(py_astar.Grid, py_astar.AStar),
             },
             'args_sets': [()]
         }
