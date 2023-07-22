@@ -25,7 +25,10 @@ I disabled `ptrace_scope` so that we won't be asked to authenticate when attachi
 echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
 ```
 
-[<img src="https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg" width="50%">](https://https://youtu.be/4nGcLkVcF9o "Debuggind in VS Code")
+[![Watch the video](https://img.youtube.com/vi/4nGcLkVcF9o/hqdefault.jpg)](https://www.youtube.com/embed/4nGcLkVcF9o)
+
+[<img src="https://img.youtube.com/vi/4nGcLkVcF9o/hqdefault.jpg" width="600" height="300"
+/>](https://www.youtube.com/embed/4nGcLkVcF9o)
 
 
 
