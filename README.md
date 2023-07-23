@@ -38,7 +38,27 @@ DEBUG=1 pip install --upgrade -e torch_utils
 ```
 for debugging.
 
-## Debugging
+
+## Running the project
+
+All functions and classes are utilized in the `main.py` script and can be run by calling:
+```bash
+python main.py
+```
+and the expected output should read:
+```
+timeit(py_subtract_n_times, args_set_0) = 30.773[ms] (x6602.1 wrt the fastest)
+timeit(numba_subtract_n_times, args_set_0) = 0.005[ms] (x1.0 wrt the fastest)
+timeit(cpp_subtract_n_times, args_set_0) = 0.005[ms] (x1.0 wrt the fastest)
+
+timeit(py_<lambda>, args_set_0) = 13.650[ms] (x4.4 wrt the fastest)
+timeit(cpp_<lambda>, args_set_0) = 3.111[ms] (x1.0 wrt the fastest)
+
+timeit(py_subtract_n_times, args_set_0) = 584.810[ms] (x71240.1 wrt the fastest)
+timeit(cpp_subtract_tensor_n_times, args_set_0) = 0.008[ms] (x1.0 wrt the fastest)
+```
+
+### Debugging
 
 I wanted to be able to debug the Python script as well as the C++ library's code that's being called from within the Python script.
 
@@ -53,15 +73,38 @@ I recorded my screen to give a sense of what I was trying to achieve:
 [![Watch the video](https://img.youtube.com/vi/4nGcLkVcF9o/hqdefault.jpg)](https://www.youtube.com/embed/4nGcLkVcF9o)
 
 
-# What worked
+# Functions and classes
 
-## `torch`
-Following the example in the [`extension-cpp` repo](https://github.com/pytorch/extension-cpp/blob/master/cpp/setup.py), 
-```bash
-python -m pip install torch==2.0.1+cpu --index-url https://download.pytorch.org/whl/cpu
+My purpose was to create a framework for further development (mainly for my day job) and not developing a super-duper project utilizing `pybind11`. Thus, the functions and classes in this project are not very sophisticated, but they served their purpose.
+
+The `simple_functions.cpp` file holds one function, `subtract_n_times` whose Python counterpart is in the `simple_functions.py` module.
+
+A bit more complicated is the `astar.cpp` file containing three classes: `Node`, `Grid`, and `AStar`. The `Grid` and `AStar` classes are exposed for Python, and implement the cost map, and the A-star algorithm. `AStar` uses `std::async` to evaluate neighbors in parallel.
+
+But there's one significant aspect of my everyday work that I wanted to pursue as well, and that is: how to `pybind11` with `torch`? And this part took most of the time I dedicated to the project, to be honest.
+
+# Binding with `torch`
+
+## `libtorch` (which didn't work)
+Initially, I was trying to work with `libtorch` (can be downloaded [here](https://pytorch.org/get-started/locally/)), and it worked in the sense that the main package was successfully built. However, when I tried importing the module built with `libtorch` I kept getting the following error:
+```python
+>>> import torch_functions as cpp_torch_func
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: /home/md/Desktop/pybind_experiments/torch_functions.cpython-38-x86_64-linux-gnu.so: undefined symbol: _ZN8pybind116detail11type_casterIN2at6TensorEvE4loadENS_6handleEb
 ```
+and it seems this is due to the fact that the version of `pybind11` needs to match the version used when building `torch`. But even when I made sure the versions match, I still kept getting this error.
 
-# What didn't work
+As a result of digging deeper into it, I stumbled upon the examples provided by PyTorch developers. One of them, detailed below, worked!
 
-## `libtorch`
-Initially, I was trying to work with `libtorch` (can be downloaded [here](https://pytorch.org/get-started/locally/)).
+
+## Natively installed `torch` approach (which worked)
+Following the example in the [`extension-cpp` repo](https://github.com/pytorch/extension-cpp/blob/master/cpp/setup.py), allowed me to have a working sub-package (with its own, dedicated `setup.py` file).
+
+Under the hood, that sub-package uses:
+```python
+from torch.utils.cpp_extension import BuildExtension, CppExtension
+```
+which takes care of using the correct version of `pybind11`, matching compile flags and options.
+
+This is a much cleaner approach, because with out it, a newer version of `torch` would necessitate adapting the `CMakeLists.txt` every time.

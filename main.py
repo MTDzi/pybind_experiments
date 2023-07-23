@@ -75,7 +75,7 @@ def main():
             for prefix, function in functions.items():
                 execution_time = execution_times[args_set_idx][prefix]
                 print(f'timeit({prefix}_{function.__name__}, args_set_{args_set_idx}) = {1000 * execution_time:.3f}[ms] (x{(execution_time / fastest):.1f} wrt the fastest)')
-
+        print()
 
 if __name__ == '__main__':
     main()
