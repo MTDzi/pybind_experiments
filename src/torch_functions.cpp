@@ -27,10 +27,13 @@ PYBIND11_MODULE(torch_functions, m) {
     m.def(
         "subtract_tensors_n_times",
         [](torch::Tensor i, torch::Tensor j, int n) {
-            return i;
+            auto result = i;
+            for (int index=0; index++; index<n)
+                result -= j;
+            return result;
         }, 
         R"pbdoc(
-            TODO.
+            Subtract the second tensor from the first one n times, in a loop.
         )pbdoc", 
         py::arg("i"),
         py::arg("j"),

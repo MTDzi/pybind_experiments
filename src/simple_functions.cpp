@@ -28,7 +28,7 @@ PYBIND11_MODULE(simple_functions, m) {
             return result;
         }, 
         R"pbdoc(
-            Subtract the second number from the first one n times.
+            Subtract the second number from the first one n times, in a loop.
         )pbdoc", 
         py::arg("i"),
         py::arg("j"),
