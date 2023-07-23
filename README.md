@@ -11,8 +11,32 @@ such that I could apply this knowledge to my everyday work which is mainly Pytho
 
 ## Motivation
 
-My biggest difficulty with C++ was always not the language itself (I mean: the syntax + its various idiosyncrasies) but environment setup (compiling / linking, debugging, but also: how to debug build systems such as CMake), thus I figured I'll develop a Capstone Project that combines two most important thigs from my perspective: how to enhance my Python skills with C++, and get more familiar with the env setup itself.
+My biggest difficulty with C++ was always not the language itself (I mean... the syntax + its various idiosyncrasies are not the greatest, but ) but environment setup (compiling / linking, debugging, but also: how to debug build systems such as CMake), thus I figured I'll develop a Capstone Project that combines two most important thigs from my perspective: how to enhance my Python skills with C++, and get more familiar with the env setup itself.
 
+
+## Building the project
+
+The project is build using two 
+
+To (re)build the project in debug mode, run:
+```bash
+DEBUG=1 TORCH_CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --no-clean --upgrade -e .
+```
+
+and to (re)build it in release mode, run:
+```bash
+TORCH_CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --upgrade -e .
+```
+
+There's also a sub-package, `torch_utils`, which needs to built with:
+```bash
+pip install --upgrade -e torch_utils
+```
+and
+```bash
+DEBUG=1 pip install --upgrade -e torch_utils
+```
+for debugging.
 
 ## Debugging
 
@@ -25,24 +49,8 @@ I disabled `ptrace_scope` so that we won't be asked to authenticate when attachi
 echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
 ```
 
+I recorded my screen to give a sense of what I was trying to achieve:
 [![Watch the video](https://img.youtube.com/vi/4nGcLkVcF9o/hqdefault.jpg)](https://www.youtube.com/embed/4nGcLkVcF9o)
-
-[<img src="https://img.youtube.com/vi/4nGcLkVcF9o/hqdefault.jpg" width="600" height="300"
-/>](https://www.youtube.com/embed/4nGcLkVcF9o)
-
-
-
-## Building the project
-
-To (re)build the project in debug mode, run:
-```bash
-DEBUG=1 TORCH_CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --no-clean --upgrade -e .
-```
-
-and to (re)build it in release mode, run:
-```bash
-TORCH_CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --upgrade -e .
-```
 
 
 # What worked

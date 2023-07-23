@@ -1,6 +1,5 @@
 import timeit
 
-import numpy as np
 import torch
 
 import src.simple_functions as py_func
@@ -8,11 +7,11 @@ import src.astar as py_astar
 import simple_functions as cpp_func
 import astar as cpp_astar
 try:
-    import torch_functions as cpp_torch_functions
-    cpp_torch_functions.subtract_tensors_n_times(torch.Tensor([0, 1, 2], device='cpu'), torch.Tensor([3,4,5], device='cpu'), 100)
+    import torch_functions as cpp_torch_func
+    cpp_torch_func.subtract_tensors_n_times(torch.Tensor([0, 1, 2], device='cpu'), torch.Tensor([3,4,5], device='cpu'), 100)
 except:
-    from torch_utils import cpp
-
+    from torch_utils import cpp as cpp_torch_func
+    
 
 def run_astar(GridClass, AStarClass, grid_size=20):
     # Create a grid
@@ -50,10 +49,17 @@ def main():
                 'cpp': lambda: run_astar(py_astar.Grid, py_astar.AStar),
             },
             'args_sets': [()]
-        }
+        },
+        {
+            'functions': {
+                'py': py_func.subtract_n_times,
+                'cpp': cpp_torch_func.subtract_tensor_n_times,
+            },
+            'args_sets': [(torch.zeros(100), torch.zeros(100), 100000)]
+        },
     ]
     
-    num_repetitions = 1000
+    num_repetitions = 10
     for use_case in use_cases:
         functions = use_case['functions']
         args_sets = use_case['args_sets']
