@@ -1,0 +1,31 @@
+{
+  "configurations": [
+    {
+      "name": "Your Project Name",
+      "includePath": [
+        "/home/md/pybind_env/lib/python3.8/site-packages/torch/include",
+        "/home/md/pybind_env/lib/python3.8/site-packages/torch/include/torch/csrc/api/include",
+        "/home/md/pybind_env/lib/python3.8/site-packages/torch/include/TH",
+        "/home/md/pybind_env/lib/python3.8/site-packages/torch/include/THC",
+        "${workspaceFolder}/**" // This includes all files in your workspace
+      ],
+      "browse": {
+        "path": [
+          "/home/md/pybind_env/lib/python3.8/site-packages/torch/include",
+          "/home/md/pybind_env/lib/python3.8/site-packages/torch/include/torch/csrc/api/include",
+          "/home/md/pybind_env/lib/python3.8/site-packages/torch/include/TH",
+          "/home/md/pybind_env/lib/python3.8/site-packages/torch/include/THC",
+  
+        ],
+        "limitSymbolsToIncludedHeaders": true,
+        "databaseFilename": ""
+      },
+      "intelliSenseMode": "clang-x64",
+      "compilerPath": "/usr/bin/g++",
+      "cStandard": "c11",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
+}
+

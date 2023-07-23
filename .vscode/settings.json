@@ -2,6 +2,8 @@
     "files.associations": {
         "condition_variable": "cpp",
         "future": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "functional": "cpp",
+        "variant": "cpp"
     }
 }
