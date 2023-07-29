@@ -19,6 +19,7 @@ My biggest difficulty with C++ was always not the language itself (I mean... the
 I built this project with:
 * Python 3.8
 * g++ 7.5
+
 but for Python we'll need a virtualenv.
 
 
@@ -39,18 +40,30 @@ pip install -r requirements.txt
 ```
 Now we're all set to build the project.
 
+
+### Getting `pybind11`
+
+The `pybind11` code is a submodule in this repo. To get it, run:
+```bash
+git submodule init
+git submodule update
+```
+
+
 ### Building the project
+
+We need to have the Python virtual env already activated, so please make sure you're still using the same terminal as you used above and that the venv is indeed activated. 
 
 The project is composed of two Python packages (each with its own `setup.py` file).
 
 To (re)build the project in debug mode, run:
 ```bash
-DEBUG=1 TORCH_CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --no-clean --upgrade -e .
+DEBUG=1 CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --no-clean --upgrade -e .
 ```
 
 and to (re)build it in release mode, run:
 ```bash
-TORCH_CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --upgrade -e .
+CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --upgrade -e .
 ```
 
 There's also a sub-package, `torch_utils`, which needs to built with:
