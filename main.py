@@ -11,6 +11,7 @@ try:
     cpp_torch_func.subtract_tensors_n_times(torch.Tensor([0, 1, 2], device='cpu'), torch.Tensor([3,4,5], device='cpu'), 100)
 except:
     from torch_utils import cpp as cpp_torch_func
+    cpp_torch_func.subtract_tensor_n_times(torch.Tensor([0, 1, 2], device='cpu'), torch.Tensor([3,4,5], device='cpu'), 100)
     
 
 def run_astar(GridClass, AStarClass, grid_size=20):

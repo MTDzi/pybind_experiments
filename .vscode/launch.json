@@ -31,6 +31,16 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "build torch_utils",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/torch_utils/setup.py",
+            "cwd": "${workspaceFolder}/torch_utils",
+            "console": "integratedTerminal",
+            "args": ["install"],
+            "justMyCode": false,
         }
     ]
 }

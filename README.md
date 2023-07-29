@@ -11,12 +11,37 @@ such that I could apply this knowledge to my everyday work which is mainly Pytho
 
 ## Motivation
 
-My biggest difficulty with C++ was always not the language itself (I mean... the syntax + its various idiosyncrasies are not the greatest, but ) but environment setup (compiling / linking, debugging, but also: how to debug build systems such as CMake), thus I figured I'll develop a Capstone Project that combines two most important thigs from my perspective: how to enhance my Python skills with C++, and get more familiar with the env setup itself.
+My biggest difficulty with C++ was always not the language itself (I mean... the syntax + its various idiosyncrasies are not the greatest, but with a right debugging setup they're managable) but environment setup (compiling / linking, debugging, but also: how to debug build systems such as CMake), thus I figured I'll develop a Capstone Project that combines two most important thigs from my perspective: how to enhance my Python skills with C++, and get more familiar with the env setup itself.
 
 
-## Building the project
+## Build
 
-The project is build using two 
+I built this project with:
+* Python 3.8
+* g++ 7.5
+but for Python we'll need a virtualenv.
+
+
+### Python virtualenv
+
+Let's first create and activate a virtualenv called `pybind_env` (I'm using `python3.8` but any version >= 3.8 should be OK):
+```bash
+python3.8 -m venv pybind_env
+source pybind_env/bin/activate
+```
+We'll also need the latest version of `pip` for installing packages:
+```bash
+pip install --upgrade pip
+```
+and now we can install the dependencies:
+```bash
+pip install -r requirements.txt
+```
+Now we're all set to build the project.
+
+### Building the project
+
+The project is composed of two Python packages (each with its own `setup.py` file).
 
 To (re)build the project in debug mode, run:
 ```bash
@@ -34,7 +59,7 @@ pip install --upgrade -e torch_utils
 ```
 and
 ```bash
-DEBUG=1 pip install --upgrade -e torch_utils
+DEBUG=1 pip install --no-clean --upgrade -e torch_utils
 ```
 for debugging.
 
