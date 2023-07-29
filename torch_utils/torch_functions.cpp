@@ -3,7 +3,7 @@
 
 torch::Tensor subtract_tensor_n_times(torch::Tensor i, torch::Tensor j, int n) {
   auto result = i;
-  for (int index=0; index++; index<n) {
+  for (int index=0; index<n; index++) {
     result -= j;
   }
   return result;

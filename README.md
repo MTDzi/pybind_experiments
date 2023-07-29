@@ -20,8 +20,10 @@ I built this project with:
 * Python 3.8
 * g++ 7.5
 
-but for Python we'll need a virtualenv.
-
+but for Python we'll need a virtualenv, so it might be necessary to install `python3-venv`:
+```bash
+sudo apt-get update && sudo apt-get install python3-venv
+```
 
 ### Python virtualenv
 
@@ -58,21 +60,21 @@ The project is composed of two Python packages (each with its own `setup.py` fil
 
 To (re)build the project in debug mode, run:
 ```bash
-DEBUG=1 CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --no-clean --upgrade -e .
+DEBUG=1 TORCH_CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --no-clean --upgrade -e .
 ```
 
 and to (re)build it in release mode, run:
 ```bash
-CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --upgrade -e .
+TORCH_CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --upgrade -e .
 ```
 
-There's also a sub-package, `torch_utils`, which needs to built with:
+There's also a sub-package, `torch_utils`, which needs to be built with:
 ```bash
-pip install --upgrade -e torch_utils
+pip install --upgrade -e ./torch_utils
 ```
 and
 ```bash
-DEBUG=1 pip install --no-clean --upgrade -e torch_utils
+DEBUG=1 pip install --no-clean --upgrade -e ./torch_utils
 ```
 for debugging.
 
