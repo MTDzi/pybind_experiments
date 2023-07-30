@@ -1,5 +1,7 @@
 --find-links https://download.pytorch.org/whl/torch_stable.html
 torch==1.13.1+cpu
+ninja==1.11.1
 numpy==1.24.4
 numba==0.57.1
 pip==21.1
+setuptools==39.0.1

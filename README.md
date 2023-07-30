@@ -19,6 +19,8 @@ My biggest difficulty with C++ was always not the language itself (I mean... the
 I built this project with:
 * Python 3.8
 * g++ 7.5
+* ninja-built 1.8.2
+* CMake 3.26.4
 
 but for Python we'll need a virtualenv, so it might be necessary to install `python3-venv`:
 ```bash
