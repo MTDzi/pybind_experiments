@@ -40,7 +40,7 @@ and now we can install the dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-Now we're all set to build the project.
+Now we have the virtualenv ready and activated, let's move to the next step.
 
 
 ### Getting `pybind11`
