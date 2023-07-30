@@ -8,6 +8,9 @@ The purpose of this project was to explore `pybind11` and to:
 3. Play a bit with pybinding PyTorch's C++ API
 such that I could apply this knowledge to my everyday work which is mainly Python-related.
 
+**I recorded a YouTube video showing the build process on GitHub Codespaces:**
+[![Watch the video](https://img.youtube.com/vi/4nGcLkVcF9o/hqdefault.jpg)](https://youtu.be/laF0FaGqLWo)
+
 
 ## Motivation
 
@@ -15,6 +18,8 @@ My biggest difficulty with C++ was always not the language itself (I mean... the
 
 
 ## Build
+
+### **I recorded a YouTube video showing the build process on GitHub Codespaces:** [here](https://youtu.be/laF0FaGqLWo).
 
 I built this project with:
 * Python 3.8
@@ -55,8 +60,6 @@ git submodule update
 
 
 ### Building the project
-
-**I recorded a YouTube video showing the build process on GitHub Codespaces:** [here](https://youtu.be/laF0FaGqLWo).
 
 We need to have the Python virtual env already activated, so please make sure you're still using the same terminal as you used above and that the venv is indeed activated. 
 
