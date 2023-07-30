@@ -19,8 +19,13 @@ My biggest difficulty with C++ was always not the language itself (I mean... the
 I built this project with:
 * Python 3.8
 * g++ 7.5
-but for Python we'll need a virtualenv.
+* ninja-built 1.8.2
+* CMake 3.26.4
 
+but for Python we'll need a virtualenv, so it might be necessary to install `python3-venv`:
+```bash
+sudo apt-get update && sudo apt-get install python3-venv
+```
 
 ### Python virtualenv
 
@@ -37,9 +42,21 @@ and now we can install the dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-Now we're all set to build the project.
+Now we have the virtualenv ready and activated, let's move to the next step.
+
+
+### Getting `pybind11`
+
+The `pybind11` code is a submodule in this repo. To get it, run:
+```bash
+git submodule init
+git submodule update
+```
+
 
 ### Building the project
+
+We need to have the Python virtual env already activated, so please make sure you're still using the same terminal as you used above and that the venv is indeed activated. 
 
 The project is composed of two Python packages (each with its own `setup.py` file).
 
@@ -53,13 +70,13 @@ and to (re)build it in release mode, run:
 TORCH_CMAKE_PREFIX_PATH=`python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)'` pip install --upgrade -e .
 ```
 
-There's also a sub-package, `torch_utils`, which needs to built with:
+There's also a sub-package, `torch_utils`, which needs to be built with:
 ```bash
-pip install --upgrade -e torch_utils
+pip install --upgrade -e ./torch_utils
 ```
 and
 ```bash
-DEBUG=1 pip install --no-clean --upgrade -e torch_utils
+DEBUG=1 pip install --no-clean --upgrade -e ./torch_utils
 ```
 for debugging.
 
