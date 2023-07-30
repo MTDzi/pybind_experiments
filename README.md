@@ -24,7 +24,7 @@ I built this project with:
 
 but for Python we'll need a virtualenv, so it might be necessary to install `python3-venv`:
 ```bash
-sudo apt-get update && sudo apt-get install python3-venv
+sudo apt-get update && sudo apt-get install -y python3-venv
 ```
 
 ### Python virtualenv
@@ -55,6 +55,8 @@ git submodule update
 
 
 ### Building the project
+
+**I recorded a YouTube video showing the build process on GitHub Codespaces:** [here](https://youtu.be/laF0FaGqLWo).
 
 We need to have the Python virtual env already activated, so please make sure you're still using the same terminal as you used above and that the venv is indeed activated. 
 
