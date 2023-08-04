@@ -11,6 +11,11 @@ such that I could apply this knowledge to my everyday work which is mainly Pytho
 **I recorded a YouTube video showing the build process on GitHub Codespaces:**
 [![Watch the video](https://img.youtube.com/vi/4nGcLkVcF9o/hqdefault.jpg)](https://youtu.be/laF0FaGqLWo)
 
+However, I got feedback that the project should work with the Udacity Workspace, hence I made a series of changes to allow for that.
+And to test out the project in the Udacity Workspace, you'll need to clone the repo with:
+```bash
+git clone --recursive https://github.com/MTDzi/pybind_experiments.git
+```
 
 ## Motivation
 
@@ -22,7 +27,7 @@ My biggest difficulty with C++ was always not the language itself (I mean... the
 ### **I recorded a YouTube video showing the build process on GitHub Codespaces:** [here](https://youtu.be/laF0FaGqLWo).
 
 I built this project with:
-* Python 3.8
+* Python 3.7
 * g++ 7.5
 * ninja-built 1.8.2
 * CMake 3.26.4
@@ -34,9 +39,9 @@ sudo apt-get update && sudo apt-get install -y python3-venv
 
 ### Python virtualenv
 
-Let's first create and activate a virtualenv called `pybind_env` (I'm using `python3.8` but any version >= 3.8 should be OK):
+Let's first create and activate a virtualenv called `pybind_env` (I'm using `python3.7` but any version >= 3.7 should be OK):
 ```bash
-python3.8 -m venv pybind_env
+python -m venv pybind_env
 source pybind_env/bin/activate
 ```
 We'll also need the latest version of `pip` for installing packages:
